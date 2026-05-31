@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import React, { useMemo } from "react";
 import { type Todo, useTodoList } from "@/hooks/useTodoList";
 import useTheme from "@/hooks/useTheme";
@@ -16,7 +16,14 @@ const TodoItem = ({ todo }: { todo: Todo }) => {
   };
 
   const handleTodoDelete = () => {
-    deleteTodo(todo.id);
+    Alert.alert("Delete Todo", "Are you sure you want to delete this todo?", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => deleteTodo(todo.id),
+      },
+    ]);
   };
 
   return (
@@ -57,6 +64,17 @@ const TodoItem = ({ todo }: { todo: Todo }) => {
           >
             {todo.title}
           </Text>
+        </View>
+        <View style={styles.todoActions}>
+          <TouchableOpacity style={[styles.actionButton]}>
+            <Ionicons name="pencil-outline" color={colors.text} size={24} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.actionButton]}
+            onPress={handleTodoDelete}
+          >
+            <Ionicons name="trash-outline" color={colors.danger} size={24} />
+          </TouchableOpacity>
         </View>
       </LinearGradient>
     </View>

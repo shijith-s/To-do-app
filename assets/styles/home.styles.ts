@@ -171,7 +171,7 @@ export const createHomeStyles = (colors: ColorScheme) => {
     },
     todoActions: {
       flexDirection: "row",
-      gap: 12,
+      gap: 2,
     },
     actionButton: {
       width: 40,
