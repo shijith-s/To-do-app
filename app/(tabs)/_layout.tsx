@@ -19,6 +19,8 @@ const TabsLayout = () => {
           paddingBottom: 5,
           paddingTop: 5,
           borderRadius: themeStyles.borderRadius,
+          borderColor: colors.border,
+          borderWidth: 1,
           marginBottom: 10,
           marginHorizontal: 20,
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
