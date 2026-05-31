@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 export interface Todo {
   id: string;
@@ -44,9 +44,23 @@ export const TodoListProvider = ({
     setTodos([]);
   };
 
+  const sortedTodos = useMemo(() => {
+    return todos.sort((a, b) => {
+      if (a.isCompleted && !b.isCompleted) return 1;
+      if (!a.isCompleted && b.isCompleted) return -1;
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    });
+  }, [todos]);
+
   return (
     <TodoListContext.Provider
-      value={{ todos, addTodo, updateTodo, deleteTodo, clearAllTodos }}
+      value={{
+        todos: sortedTodos,
+        addTodo,
+        updateTodo,
+        deleteTodo,
+        clearAllTodos,
+      }}
     >
       {children}
     </TodoListContext.Provider>
