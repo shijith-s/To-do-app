@@ -1,7 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useMemo } from "react";
+import useTheme, { ColorScheme, ThemeStyles } from "@/hooks/useTheme";
 
 const Settings = () => {
+  const { colors, themeStyles } = useTheme();
+  const styles = useMemo(
+    () => createStyles(colors, themeStyles),
+    [colors, themeStyles],
+  );
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Settings</Text>
@@ -11,14 +17,16 @@ const Settings = () => {
 
 export default Settings;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});
+const createStyles = (colors: ColorScheme, themeStyles: ThemeStyles) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    text: {
+      fontSize: 20,
+      fontWeight: "bold",
+      color: colors.text,
+    },
+  });

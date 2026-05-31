@@ -4,21 +4,25 @@ import { Ionicons } from "@expo/vector-icons";
 import useTheme from "@/hooks/useTheme";
 
 const TabsLayout = () => {
-  const { colors } = useTheme();
+  const { colors, themeStyles } = useTheme();
   return (
     <Tabs
       screenOptions={{
+        sceneStyle: {
+          backgroundColor: colors.bg,
+        },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textMuted,
         tabBarStyle: {
           backgroundColor: colors.surface,
-          height: 60,
+          height: themeStyles.borderRadius * 2,
           paddingBottom: 5,
           paddingTop: 5,
-          borderRadius: 100,
+          borderRadius: themeStyles.borderRadius,
           marginBottom: 10,
           marginHorizontal: 20,
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+          position: "absolute",
         },
         headerShown: false,
       }}

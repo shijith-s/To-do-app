@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 export interface ColorScheme {
   bg: string;
   surface: string;
@@ -27,6 +26,10 @@ export interface ColorScheme {
     editInput: string;
   };
   statusBarStyle: "light-content" | "dark-content";
+}
+
+export interface ThemeStyles {
+  borderRadius: number;
 }
 
 const lightColors: ColorScheme = {
@@ -85,10 +88,15 @@ const darkColors: ColorScheme = {
   statusBarStyle: "light-content" as const,
 };
 
+const genericStyles = {
+  borderRadius: 30,
+};
+
 interface ThemeContextType {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
   colors: ColorScheme;
+  themeStyles: ThemeStyles;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -119,7 +127,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const colors = isDarkMode ? darkColors : lightColors;
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode, colors }}>
+    <ThemeContext.Provider
+      value={{ isDarkMode, toggleDarkMode, colors, themeStyles: genericStyles }}
+    >
       {children}
     </ThemeContext.Provider>
   );
