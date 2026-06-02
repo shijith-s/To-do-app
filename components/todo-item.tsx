@@ -1,17 +1,21 @@
-import { View, Text, TouchableOpacity, Alert } from "react-native";
-import React, { useMemo } from "react";
+import { View, TouchableOpacity, Alert } from "react-native";
+import React, { useMemo, useState } from "react";
 import { type Todo, useTodoList } from "@/hooks/useTodoList";
 import useTheme from "@/hooks/useTheme";
 import { createHomeStyles } from "@/assets/styles/home.styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
+import { TodoPreview } from "./todo-preview";
+import { TodoEdit } from "./todo-edit";
 
 const TodoItem = ({ todo }: { todo: Todo }) => {
   const { colors } = useTheme();
   const styles = useMemo(() => createHomeStyles(colors), [colors]);
   const { updateTodo, deleteTodo } = useTodoList();
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleTodoComplete = () => {
+    if (isEditing) return;
     updateTodo(todo.id, { ...todo, isCompleted: !todo.isCompleted });
   };
 
@@ -26,6 +30,11 @@ const TodoItem = ({ todo }: { todo: Todo }) => {
     ]);
   };
 
+  const handleTodoEdit = (todo: Todo) => {
+    updateTodo(todo.id, todo);
+    setIsEditing(false);
+  };
+
   return (
     <View style={styles.todoItemWrapper}>
       <LinearGradient
@@ -34,7 +43,11 @@ const TodoItem = ({ todo }: { todo: Todo }) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <TouchableOpacity style={styles.checkbox} onPress={handleTodoComplete}>
+        <TouchableOpacity
+          style={styles.checkbox}
+          onPress={handleTodoComplete}
+          disabled={isEditing}
+        >
           <LinearGradient
             colors={
               todo.isCompleted
@@ -55,27 +68,19 @@ const TodoItem = ({ todo }: { todo: Todo }) => {
             )}
           </LinearGradient>
         </TouchableOpacity>
-        <View style={styles.todoTextContainer}>
-          <Text
-            style={[
-              styles.todoText,
-              todo.isCompleted && styles.todoTextCompleted,
-            ]}
-          >
-            {todo.title}
-          </Text>
-        </View>
-        <View style={styles.todoActions}>
-          <TouchableOpacity style={[styles.actionButton]}>
-            <Ionicons name="pencil-outline" color={colors.text} size={24} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.actionButton]}
-            onPress={handleTodoDelete}
-          >
-            <Ionicons name="trash-outline" color={colors.danger} size={24} />
-          </TouchableOpacity>
-        </View>
+        {isEditing ? (
+          <TodoEdit
+            todo={todo}
+            handleSave={handleTodoEdit}
+            handleCancel={() => setIsEditing(false)}
+          />
+        ) : (
+          <TodoPreview
+            todo={todo}
+            handleEdit={() => setIsEditing(true)}
+            handleDelete={handleTodoDelete}
+          />
+        )}
       </LinearGradient>
     </View>
   );

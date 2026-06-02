@@ -154,6 +154,12 @@ export const createHomeStyles = (colors: ColorScheme) => {
       justifyContent: "center",
       alignItems: "center",
     },
+    todoPreview: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      flex: 1,
+    },
     todoTextContainer: {
       flex: 1,
     },
