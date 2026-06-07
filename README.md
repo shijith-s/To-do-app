@@ -1,50 +1,32 @@
-# Welcome to your Expo app 👋
+### To-Do Mobile Application
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a simple to-do mobile application made using expo and react native. 
+Technologies used: React Native, Expo, expo-sqlite
 
-## Get started
+## Features
+- Theme support - Dark and lightÏ
+- Adding, updating and deleting of todos
+- Persistence of added todos using expo sqlite
+- Persistence of theme preferences using async storage
+- Progress bar for todos
 
-1. Install dependencies
+## Screenshots
 
-   ```bash
-   npm install
-   ```
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/365b43a5-8c3d-40bc-8464-d34b433f377d" width="160"></td>
+    <td><img src="https://github.com/user-attachments/assets/d538d00c-b633-4d36-99c4-03d8e6b70a0a" width="160"></td>
+    <td><img src="https://github.com/user-attachments/assets/485c450c-6daa-4d41-8c4c-7cb522664d76" width="160"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/a1801c7a-f671-4eac-9b53-2c3fc1851642" width="160"></td>
+    <td><img src="https://github.com/user-attachments/assets/d1b5ad22-00ad-4573-9ba0-1fd81903199d" width="160"></td>
+    <td><img src="https://github.com/user-attachments/assets/9f55492d-3cdb-48bd-a15e-c67f4ceb9dcd" width="160"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/f26c2074-e2a7-482a-863c-c71cc19ddd71" width="160"></td>
+    <td><img src="https://github.com/user-attachments/assets/d3bfce3d-8f5b-4c72-a098-17d3aafce894" width="160"></td>
+    <td><img src="https://github.com/user-attachments/assets/02c4ab9d-6b7a-4217-91f0-bbeabc63d4b7" width="160"></td>
+  </tr>
+</table>
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
