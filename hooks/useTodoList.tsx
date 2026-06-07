@@ -1,4 +1,5 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import * as TodoDB from "@/lib/todo";
 
 export interface Todo {
   id: string;
@@ -28,16 +29,32 @@ export const TodoListProvider = ({
 }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
+  useEffect(() => {
+    console.log("Fetching todos");
+    const fetchTodos = async () => {
+      try {
+        const todos = await TodoDB.getTodos();
+        setTodos(todos);
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    };
+    fetchTodos();
+  }, []);
+
   const addTodo = (todo: Todo) => {
     setTodos([...todos, todo]);
+    TodoDB.addTodo(todo);
   };
 
   const updateTodo = (id: string, todo: Todo) => {
     setTodos(todos.map((t) => (t.id === id ? todo : t)));
+    TodoDB.updateTodo(todo);
   };
 
   const deleteTodo = (id: string) => {
     setTodos(todos.filter((t) => t.id !== id));
+    TodoDB.deleteTodo(id);
   };
 
   const clearAllTodos = () => {
