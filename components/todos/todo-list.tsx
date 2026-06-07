@@ -4,7 +4,7 @@ import { createHomeStyles } from "@/assets/styles/home.styles";
 import useTheme from "@/hooks/useTheme";
 import TodoItem from "./todo-item";
 import { useTodoList } from "@/hooks/useTodoList";
-import EmptyState from "@/components/empty-state";
+import EmptyState from "@/components/todos/empty-state";
 
 const TodoList = () => {
   const { colors } = useTheme();

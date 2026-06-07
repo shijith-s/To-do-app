@@ -4,9 +4,9 @@ import { StatusBar } from "react-native";
 import { createHomeStyles } from "@/assets/styles/home.styles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import Header from "@/components/header";
-import TodoInput from "@/components/todo-input";
-import TodoList from "@/components/todo-list";
+import Header from "@/components/todos/header";
+import TodoInput from "@/components/todos/todo-input";
+import TodoList from "@/components/todos/todo-list";
 
 export default function Index() {
   const { colors } = useTheme();
