@@ -1,32 +1,28 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StatusBar } from "react-native";
 import React, { useMemo } from "react";
-import useTheme, { ColorScheme, ThemeStyles } from "@/hooks/useTheme";
+import useTheme from "@/hooks/useTheme";
+import { LinearGradient } from "expo-linear-gradient";
+import { createSettingsStyles } from "@/assets/styles/settings.styles";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Header } from "@/components/settings/header";
+import { Preferences } from "@/components/settings/preferences";
 
 const Settings = () => {
-  const { colors, themeStyles } = useTheme();
-  const styles = useMemo(
-    () => createStyles(colors, themeStyles),
-    [colors, themeStyles],
-  );
+  const { colors } = useTheme();
+  const styles = useMemo(() => createSettingsStyles(colors), [colors]);
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Settings</Text>
-    </View>
+    <LinearGradient
+      colors={colors.gradients.background}
+      style={styles.container}
+    >
+      <StatusBar barStyle={colors.statusBarStyle} />
+      <SafeAreaView style={styles.safeArea}>
+        <Header />
+        <Preferences />
+        {/* danger zone */}
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
 export default Settings;
-
-const createStyles = (colors: ColorScheme, themeStyles: ThemeStyles) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    text: {
-      fontSize: 20,
-      fontWeight: "bold",
-      color: colors.text,
-    },
-  });
